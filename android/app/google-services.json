@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "185869155795",
+    "project_id": "proteinsample",
+    "storage_bucket": "proteinsample.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185869155795:android:0e71197d7612f434408326",
+        "android_client_info": {
+          "package_name": "com.example.hug_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185869155795-638j0mrg2k9thck6innlgq7uba83n346.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7DX3jQHv_7c_2pDZ7vn-iykbBTOESKag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185869155795-638j0mrg2k9thck6innlgq7uba83n346.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "185869155795-4tcilvdt0fgfnfg8p14kvvvm25q3gmp5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.proteinSample"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185869155795:android:a9fa1a9f488a036c408326",
+        "android_client_info": {
+          "package_name": "com.instaflutter.dating.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185869155795-638j0mrg2k9thck6innlgq7uba83n346.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7DX3jQHv_7c_2pDZ7vn-iykbBTOESKag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185869155795-638j0mrg2k9thck6innlgq7uba83n346.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "185869155795-4tcilvdt0fgfnfg8p14kvvvm25q3gmp5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.proteinSample"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

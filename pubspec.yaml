@@ -35,12 +35,12 @@ flutter_native_splash:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
-
   flutter_lints: ^1.0.0
+  #日本語化に必要な記載
+  flutter_localizations:
+    sdk: flutter
 
 flutter:
-
-
   uses-material-design: true
+  assets:
+    - assets/images/

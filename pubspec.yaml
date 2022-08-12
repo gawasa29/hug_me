@@ -20,6 +20,17 @@ dependencies:
 
   #state management
   flutter_riverpod: ^1.0.4
+  #splash screen
+  flutter_native_splash: 2.2.6
+
+#splash screen
+flutter_native_splash:
+  image: assets/images/hug_me_logo.png
+  color: "#61C9C3"
+  color_dark: "#042a49"
+  image_dark: assets/images/hug_me_logo.png
+  android_12:
+  fullscreen: true
 
 dev_dependencies:
   flutter_test:

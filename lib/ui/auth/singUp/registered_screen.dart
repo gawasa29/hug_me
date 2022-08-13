@@ -27,29 +27,49 @@ class _RegisteredScreenState extends State<RegisteredScreen> {
         ),
         body: Column(
           children: <Widget>[
-            const Text(
-              '登録が完了しました！',
-              style: TextStyle(
-                fontSize: 24,
-                color: Color.fromARGB(255, 83, 83, 83),
-              ),
-            ),
-            const Text(
-              'これからあなたに合った相手を見つけるために、プロフィールを完成させましょう全て登録するとより多くの相手と出会うことができます。',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color.fromARGB(255, 83, 83, 83),
-              ),
-            ),
-            const Text(
-              '利用規約及びコミュニティガイドライン、プライバシーポリシーへの同意が必要となります。',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color.fromARGB(255, 83, 83, 83),
+            Expanded(
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 40.0,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        textAlign: TextAlign.left,
+                        '登録が完了しました！',
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Color.fromARGB(255, 83, 83, 83),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 40.0,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        'これからあなたに合った相手を見つける\nために、プロフィールを完成させましょう\n全て登録するとより多くの相手と出会う\nことができます。',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 191, 191, 191),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Image.asset('assets//images/hug_photo.png'),
+                  ),
+                ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+              padding:
+                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
@@ -61,7 +81,7 @@ class _RegisteredScreenState extends State<RegisteredScreen> {
                         side: const BorderSide(color: Color(mainColor))),
                   ),
                   child: const Text(
-                    '次',
+                    'プロフィールを作成する',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

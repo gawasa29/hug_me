@@ -48,44 +48,69 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
         ),
         body: Column(
           children: <Widget>[
-            const Text(
-              '生年月日',
-              style: TextStyle(
-                fontSize: 24,
-                color: Color.fromARGB(255, 83, 83, 83),
-              ),
-            ),
-            const Text(
-              '登録後は変更できません。',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color.fromARGB(255, 83, 83, 83),
-              ),
-            ),
-            TextButton(
-              child: Text(
-                DateFormat('yyyy/MM/dd').format(datetime),
-                style: const TextStyle(
-                  fontSize: 24,
-                  color: Color.fromARGB(255, 83, 83, 83),
-                ),
-              ),
-              onPressed: () {
-                _showDialog(
-                  CupertinoDatePicker(
-                    initialDateTime: datetime,
-                    mode: CupertinoDatePickerMode.date,
-                    use24hFormat: true,
-                    // This is called when the user changes the date.
-                    onDateTimeChanged: (DateTime newDate) {
-                      setState(() => datetime = newDate);
+            Expanded(
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 40.0,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        textAlign: TextAlign.left,
+                        '生年月日',
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Color.fromARGB(255, 83, 83, 83),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 40.0,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        '8文字以内で入力してください。ニックネームは後から変更可能です。',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 191, 191, 191),
+                        ),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    child: Text(
+                      DateFormat('yyyy/MM/dd').format(datetime),
+                      style: const TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontSize: 30,
+                        color: Color.fromARGB(255, 83, 83, 83),
+                      ),
+                    ),
+                    onPressed: () {
+                      _showDialog(
+                        CupertinoDatePicker(
+                          initialDateTime: datetime,
+                          mode: CupertinoDatePickerMode.date,
+                          use24hFormat: true,
+                          // This is called when the user changes the date.
+                          onDateTimeChanged: (DateTime newDate) {
+                            setState(() => datetime = newDate);
+                          },
+                        ),
+                      );
                     },
                   ),
-                );
-              },
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+              padding:
+                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(

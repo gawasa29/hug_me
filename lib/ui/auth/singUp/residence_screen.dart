@@ -80,31 +80,38 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Text(
-            '居住地',
-            style: TextStyle(
-              fontSize: 24,
-              color: Color.fromARGB(255, 83, 83, 83),
-            ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          Text(fromList[_currentIndex]),
-          SizedBox(
-            height: 200,
-            child: CupertinoPicker(
-              itemExtent: 30,
-              onSelectedItemChanged: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              children: fromList.map((e) => Text(e)).toList(),
+          Expanded(
+            child: Column(
+              children: [
+                const Text(
+                  '居住地',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Color.fromARGB(255, 83, 83, 83),
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Text(fromList[_currentIndex]),
+                SizedBox(
+                  height: 200,
+                  child: CupertinoPicker(
+                    itemExtent: 30,
+                    onSelectedItemChanged: (index) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                    children: fromList.map((e) => Text(e)).toList(),
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+            padding:
+                const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
             child: ConstrainedBox(
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(

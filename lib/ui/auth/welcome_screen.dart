@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instaflutter/constants.dart';
 
-import 'birthday_screen.dart';
+import 'login_screen.dart';
+import 'singUp/birthday_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -69,7 +70,13 @@ class WelcomeScreen extends StatelessWidget {
                     color: Color(0xffFAFAFA),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                  );
+                },
               ),
             ),
           ),

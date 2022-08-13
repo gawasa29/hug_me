@@ -22,21 +22,52 @@ class NameScreen extends StatelessWidget {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Text(
-            'ニックネーム',
-            style: TextStyle(
-              fontSize: 24,
-              color: Color.fromARGB(255, 83, 83, 83),
+          Expanded(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 40.0,
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      textAlign: TextAlign.left,
+                      'ニックネーム',
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Color.fromARGB(255, 83, 83, 83),
+                      ),
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 40.0,
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      '8文字以内で入力してください。\nニックネームは後から変更可能です。',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 191, 191, 191),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 40.0, right: 70),
+                  child: TextFormField(
+                    decoration: const InputDecoration(hintText: 'Momo'),
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(
-            height: 50,
-          ),
-          TextFormField(
-            decoration: const InputDecoration(hintText: 'Momo'),
-          ),
           Padding(
-            padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+            padding:
+                const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
             child: ConstrainedBox(
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(

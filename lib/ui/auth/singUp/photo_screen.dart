@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:instaflutter/constants.dart';
 
-import 'registered_screen.dart';
-
-class StartScreen extends StatefulWidget {
-  const StartScreen({Key? key}) : super(key: key);
+class PhotoScreen extends StatefulWidget {
+  const PhotoScreen({Key? key}) : super(key: key);
 
   @override
-  State<StartScreen> createState() => _StartScreenState();
+  State<PhotoScreen> createState() => _PhotoScreenState();
 }
 
-class _StartScreenState extends State<StartScreen> {
-  bool isChecked = false;
+class _PhotoScreenState extends State<PhotoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,41 +26,18 @@ class _StartScreenState extends State<StartScreen> {
         body: Column(
           children: <Widget>[
             const Text(
-              'さあ、始めましょう！',
+              '写真を登録しましょう',
               style: TextStyle(
                 fontSize: 24,
                 color: Color.fromARGB(255, 83, 83, 83),
               ),
             ),
             const Text(
-              'Hug me!はハグする相手を見つけられるマッチングアプリです。',
+              '写真を登録するとマッチング率がアップします。',
               style: TextStyle(
                 fontSize: 15,
                 color: Color.fromARGB(255, 83, 83, 83),
               ),
-            ),
-            const Text(
-              '利用規約及びコミュニティガイドライン、プライバシーポリシーへの同意が必要となります。',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color.fromARGB(255, 83, 83, 83),
-              ),
-            ),
-            Checkbox(
-              value: isChecked,
-              onChanged: (value) {
-                setState(() {
-                  isChecked = value!;
-                });
-              },
-            ),
-            Checkbox(
-              value: isChecked,
-              onChanged: (value) {
-                setState(() {
-                  isChecked = value!;
-                });
-              },
             ),
             Padding(
               padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
@@ -85,13 +59,7 @@ class _StartScreenState extends State<StartScreen> {
                       color: Color(0xffFAFAFA),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RegisteredScreen()),
-                    );
-                  },
+                  onPressed: () {},
                 ),
               ),
             ),

@@ -19,9 +19,10 @@ class WelcomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/images/hug_me_logo.png'),
+          SizedBox(
+              height: 250, child: Image.asset('assets/images/hug_me_logo.png')),
           Padding(
-            padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+            padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 200),
             child: ConstrainedBox(
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(

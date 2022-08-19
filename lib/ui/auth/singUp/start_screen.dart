@@ -20,12 +20,6 @@ class _StartScreenState extends State<StartScreen> {
           elevation: 0.0,
           backgroundColor: Colors.white10,
           automaticallyImplyLeading: false,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-                  color: Theme.of(context).primaryColor),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
         ),
         body: Column(
           children: <Widget>[

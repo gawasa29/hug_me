@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../model/User.dart';
 import 'name_screen.dart';
 
-class ResidenceScreen extends StatefulWidget {
+class ResidenceScreen extends ConsumerStatefulWidget {
   const ResidenceScreen({Key? key}) : super(key: key);
 
   @override
-  State<ResidenceScreen> createState() => _ResidenceScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ResidenceScreenState();
 }
 
-class _ResidenceScreenState extends State<ResidenceScreen> {
+class _ResidenceScreenState extends ConsumerState<ResidenceScreen> {
   final List<String> fromList = [
     "選択",
     "北海道",
@@ -63,8 +66,10 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
   ];
 
   var _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(userModelProvider);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -131,6 +136,7 @@ class _ResidenceScreenState extends State<ResidenceScreen> {
                   ),
                 ),
                 onPressed: () {
+                  currentUser.residence = fromList[_currentIndex];
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const NameScreen()),

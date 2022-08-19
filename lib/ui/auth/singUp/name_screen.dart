@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../model/User.dart';
 import 'sing_up_screen.dart';
 
-class NameScreen extends StatelessWidget {
+class NameScreen extends ConsumerStatefulWidget {
   const NameScreen({Key? key}) : super(key: key);
 
   @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _NameScreenState();
+}
+
+class _NameScreenState extends ConsumerState<NameScreen> {
+  final _form = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(userModelProvider);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -60,6 +69,9 @@ class NameScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 40.0, right: 70),
                   child: TextFormField(
                     decoration: const InputDecoration(hintText: 'Momo'),
+                    onChanged: (String? val) {
+                      currentUser.name = val!;
+                    },
                   ),
                 ),
               ],

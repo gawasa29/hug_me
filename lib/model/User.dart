@@ -15,11 +15,14 @@ class User with ChangeNotifier {
 
   String birthday;
 
+  String residence;
+
   User({
     this.userID = "",
     this.name = "",
     this.email = "",
     this.birthday = "",
+    this.residence = "",
   });
 
   //Firebaseからデータを取得する際の変換処理
@@ -29,6 +32,7 @@ class User with ChangeNotifier {
           name: json['name'],
           email: json['email'],
           birthday: json['birthday'],
+          residence: json['residence'],
         );
 
   //DartのオブジェクトからFirebaseへ渡す際の変換処理
@@ -38,6 +42,7 @@ class User with ChangeNotifier {
       "name": name,
       'email': email,
       'birthday': birthday,
+      'residence': residence,
     };
   }
 }

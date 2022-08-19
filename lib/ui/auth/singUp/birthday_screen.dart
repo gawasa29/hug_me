@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instaflutter/constants.dart';
 import 'package:intl/intl.dart';
 
+import '../../../model/User.dart';
 import 'residence_screen.dart';
 
-class BirthdayScreen extends StatefulWidget {
+class BirthdayScreen extends ConsumerStatefulWidget {
   const BirthdayScreen({Key? key}) : super(key: key);
 
   @override
-  State<BirthdayScreen> createState() => _BirthdayScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _BirthdayScreenState();
 }
 
-class _BirthdayScreenState extends State<BirthdayScreen> {
+class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
   DateTime datetime = DateTime(2016, 10, 26);
   var formatter = DateFormat('yyyy/MM/dd(E) HH:mm', "ja_JP"); // DateからString
   void _showDialog(Widget child) {
@@ -34,6 +36,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(userModelProvider);
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -130,6 +133,9 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
                     ),
                   ),
                   onPressed: () {
+                    currentUser.birthday =
+                        DateFormat('yyyy/MM/dd').format(datetime);
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(

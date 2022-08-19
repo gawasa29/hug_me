@@ -125,29 +125,35 @@ class _StartScreenState extends State<StartScreen> {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 97, 201, 196),
-                    padding: const EdgeInsets.only(top: 12, bottom: 12),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(color: Color(mainColor))),
-                  ),
-                  child: const Text(
-                    '登録する',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xffFAFAFA),
+                    style: ElevatedButton.styleFrom(
+                      //三項演算子で色変える
+                      primary: (isChecked && isChecked2)
+                          ? const Color.fromARGB(255, 97, 201, 196)
+                          : Colors.blueAccent,
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          side: const BorderSide(color: Color(mainColor))),
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RegisteredScreen()),
-                    );
-                  },
-                ),
+                    child: const Text(
+                      '登録する',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffFAFAFA),
+                      ),
+                    ),
+                    //三項演算子でisCheckedとisChecked2がどっちもtrueでボタン押せる
+                    onPressed: (isChecked && isChecked2)
+                        ? () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const RegisteredScreen()),
+                            );
+                          }
+                        : null),
               ),
             ),
           ],

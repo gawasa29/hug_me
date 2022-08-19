@@ -1,18 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instaflutter/constants.dart';
 
+import '../../../model/User.dart';
+import '../../../utils/FirebaseHelper.dart';
 import 'bio_screen.dart';
 
-class RegisteredScreen extends StatefulWidget {
+class RegisteredScreen extends ConsumerStatefulWidget {
   const RegisteredScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisteredScreen> createState() => _RegisteredScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _RegisteredScreenState();
 }
 
-class _RegisteredScreenState extends State<RegisteredScreen> {
+class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
+  @override
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(userModelProvider);
+    //値更新用のuserクラス
+    final user = ref.watch(userModelProvider.notifier);
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -38,7 +47,7 @@ class _RegisteredScreenState extends State<RegisteredScreen> {
                       width: double.infinity,
                       child: Text(
                         textAlign: TextAlign.left,
-                        '登録が完了しました！',
+                        '登録',
                         style: TextStyle(
                           fontSize: 24,
                           color: Color.fromARGB(255, 83, 83, 83),
@@ -81,14 +90,20 @@ class _RegisteredScreenState extends State<RegisteredScreen> {
                         side: const BorderSide(color: Color(mainColor))),
                   ),
                   child: const Text(
-                    'プロフィールを作成する',
+                    'アカウントを登録',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Color(0xffFAFAFA),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    //UserModelのuserIDメンバ変数に現在ログインしているユーザーのUIDを代入
+                    currentUser.userID = FirebaseAuth.instance.currentUser!.uid;
+                    await FireStoreUtils.updateCurrentUser(currentUser);
+                    //これでfirestoreから持ってきた値をUserクラスに代入し直す
+                    user.state = (await FireStoreUtils.getCurrentUser(
+                        FirebaseAuth.instance.currentUser!.uid))!;
                     Navigator.push(
                       context,
                       MaterialPageRoute(

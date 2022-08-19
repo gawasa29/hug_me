@@ -136,7 +136,7 @@ class _StartScreenState extends State<StartScreen> {
                           side: const BorderSide(color: Color(mainColor))),
                     ),
                     child: const Text(
-                      '登録する',
+                      '次へ',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

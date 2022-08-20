@@ -11,7 +11,7 @@ class User with ChangeNotifier {
 
   String name;
 
-  String email;
+  String bio;
 
   String birthday;
 
@@ -20,7 +20,7 @@ class User with ChangeNotifier {
   User({
     this.userID = "",
     this.name = "",
-    this.email = "",
+    this.bio = "",
     this.birthday = "",
     this.residence = "",
   });
@@ -30,7 +30,7 @@ class User with ChangeNotifier {
       : this(
           userID: json['userID'],
           name: json['name'],
-          email: json['email'],
+          bio: json['bio'],
           birthday: json['birthday'],
           residence: json['residence'],
         );
@@ -40,7 +40,7 @@ class User with ChangeNotifier {
     return {
       'userID': userID,
       "name": name,
-      'email': email,
+      'bio': bio,
       'birthday': birthday,
       'residence': residence,
     };

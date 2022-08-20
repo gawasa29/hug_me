@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instaflutter/constants.dart';
 
+import '../../../model/User.dart';
+import '../../../utils/FirebaseHelper.dart';
 import 'photo_screen.dart';
 
-class BioScreen extends StatefulWidget {
+class BioScreen extends ConsumerWidget {
   const BioScreen({Key? key}) : super(key: key);
 
   @override
-  State<BioScreen> createState() => _BioScreenState();
-}
-
-class _BioScreenState extends State<BioScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(userModelProvider);
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -84,6 +83,9 @@ class _BioScreenState extends State<BioScreen> {
                           ),
                         ),
                       ),
+                      onChanged: (String? val) {
+                        currentUser.bio = val!;
+                      },
                     ),
                   ),
                 ],
@@ -110,7 +112,8 @@ class _BioScreenState extends State<BioScreen> {
                       color: Color(0xffFAFAFA),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    await FireStoreUtils.updateCurrentUser(currentUser);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

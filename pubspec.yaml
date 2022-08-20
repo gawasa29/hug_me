@@ -23,6 +23,8 @@ dependencies:
   flutter_riverpod: ^1.0.4
   #splash screen
   flutter_native_splash: 2.2.6
+  #image
+  image_picker: ^0.8.5+3
 
 #splash screen
 flutter_native_splash:

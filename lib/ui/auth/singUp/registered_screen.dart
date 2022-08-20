@@ -100,6 +100,7 @@ class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
                   onPressed: () async {
                     //UserModelのuserIDメンバ変数に現在ログインしているユーザーのUIDを代入
                     currentUser.userID = FirebaseAuth.instance.currentUser!.uid;
+                    //firestoreに値を更新
                     await FireStoreUtils.updateCurrentUser(currentUser);
                     //これでfirestoreから持ってきた値をUserクラスに代入し直す
                     user.state = (await FireStoreUtils.getCurrentUser(

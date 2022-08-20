@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instaflutter/constants.dart';
+import 'package:instaflutter/ui/home_screen.dart';
 
 class PhotoScreen extends StatefulWidget {
   const PhotoScreen({Key? key}) : super(key: key);
@@ -9,6 +13,20 @@ class PhotoScreen extends StatefulWidget {
 }
 
 class _PhotoScreenState extends State<PhotoScreen> {
+  File? _image;
+  final picker = ImagePicker();
+  Future _getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +57,44 @@ class _PhotoScreenState extends State<PhotoScreen> {
                 color: Color.fromARGB(255, 83, 83, 83),
               ),
             ),
+            Center(
+              child: _image == null
+                  ? Image.asset('assets/images/placeholder.png')
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.file(
+                        _image!,
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.fill,
+                      )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color.fromARGB(255, 97, 201, 196),
+                    padding: const EdgeInsets.only(top: 12, bottom: 12),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        side: const BorderSide(color: Color(mainColor))),
+                  ),
+                  child: const Text(
+                    '写真をアップロード',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffFAFAFA),
+                    ),
+                  ),
+                  onPressed: () {
+                    _getImage();
+                  },
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
               child: ConstrainedBox(
@@ -59,7 +115,12 @@ class _PhotoScreenState extends State<PhotoScreen> {
                       color: Color(0xffFAFAFA),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                  },
                 ),
               ),
             ),

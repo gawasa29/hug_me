@@ -1,23 +1,47 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../model/User.dart';
+
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(userModelProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('firebaseテスト'),
-      ),
-      body: const Center(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Map<String, dynamic> data = <String, dynamic>{
-            'name': "sample",
-          };
-          await FirebaseFirestore.instance.collection('sample').doc().set(data);
-        },
-        child: const Icon(Icons.add),
-      ),
-    );
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.white10,
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_new,
+                  color: Theme.of(context).primaryColor),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              const Text(
+                'テスト',
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Color.fromARGB(255, 83, 83, 83),
+                ),
+              ),
+              Text(currentUser.name),
+              Text(currentUser.birthday),
+              Text(currentUser.bio),
+              Text(currentUser.residence),
+            ],
+          ),
+        ));
   }
 }

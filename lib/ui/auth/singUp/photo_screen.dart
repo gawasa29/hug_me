@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instaflutter/constants.dart';
@@ -13,18 +15,41 @@ class PhotoScreen extends StatefulWidget {
 }
 
 class _PhotoScreenState extends State<PhotoScreen> {
-  File? _image;
-  final picker = ImagePicker();
-  Future _getImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  /// ユーザIDの取得
+  final userID = FirebaseAuth.instance.currentUser?.uid ?? '';
+  String? imageUrl;
 
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
+  uploadPic() async {
+    try {
+      /// 画像を選択
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      File file = File(image!.path);
+
+      //参照を作成
+      String uploadName = 'image.png';
+      final storageRef =
+          FirebaseStorage.instance.ref().child('users/$userID/$uploadName');
+      // Firebase Cloud Storageにアップロード
+      final task = await storageRef.putFile(file);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  downloadPic() async {
+    try {
+      /// 参照の作成
+      String downloadName = 'image.png';
+      final storageRef =
+          FirebaseStorage.instance.ref().child('users/$userID/$downloadName');
+
+      setState(() async {
+        imageUrl = await storageRef.getDownloadURL();
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -58,12 +83,12 @@ class _PhotoScreenState extends State<PhotoScreen> {
               ),
             ),
             Center(
-              child: _image == null
+              child: imageUrl == null
                   ? Image.asset('assets/images/placeholder.png')
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(100),
-                      child: Image.file(
-                        _image!,
+                      child: Image.network(
+                        imageUrl!,
                         width: 200,
                         height: 200,
                         fit: BoxFit.fill,
@@ -89,8 +114,10 @@ class _PhotoScreenState extends State<PhotoScreen> {
                       color: Color(0xffFAFAFA),
                     ),
                   ),
-                  onPressed: () {
-                    _getImage();
+                  onPressed: () async {
+                    await uploadPic();
+                    await downloadPic();
+                    setState(() {});
                   },
                 ),
               ),
@@ -118,7 +145,8 @@ class _PhotoScreenState extends State<PhotoScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen(imageUrl)),
                     );
                   },
                 ),

@@ -1,59 +1,59 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instaflutter/constants.dart';
 import 'package:instaflutter/ui/home_screen.dart';
 
-class PhotoScreen extends StatefulWidget {
+import '../../../model/User.dart';
+
+class PhotoScreen extends ConsumerStatefulWidget {
   const PhotoScreen({Key? key}) : super(key: key);
 
   @override
-  State<PhotoScreen> createState() => _PhotoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _PhotoScreenState();
 }
 
-class _PhotoScreenState extends State<PhotoScreen> {
-  /// ユーザIDの取得
-  final userID = FirebaseAuth.instance.currentUser?.uid ?? '';
-  String? imageUrl;
-
-  uploadPic() async {
-    try {
-      /// 画像を選択
-      final ImagePicker picker = ImagePicker();
-      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-      File file = File(image!.path);
-
-      //参照を作成
-      String uploadName = 'image.png';
-      final storageRef =
-          FirebaseStorage.instance.ref().child('users/$userID/$uploadName');
-      // Firebase Cloud Storageにアップロード
-      final task = await storageRef.putFile(file);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  downloadPic() async {
-    try {
-      /// 参照の作成
-      String downloadName = 'image.png';
-      final storageRef =
-          FirebaseStorage.instance.ref().child('users/$userID/$downloadName');
-
-      setState(() async {
-        imageUrl = await storageRef.getDownloadURL();
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
+class _PhotoScreenState extends ConsumerState<PhotoScreen> {
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(userModelProvider);
+    uploadPic() async {
+      try {
+        /// 画像を選択
+        final ImagePicker picker = ImagePicker();
+        final XFile? image =
+            await picker.pickImage(source: ImageSource.gallery);
+        File file = File(image!.path);
+
+        //参照を作成
+        String uploadName = 'image.png';
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('users/${currentUser.userID}/$uploadName');
+        // Firebase Cloud Storageにアップロード
+        final task = await storageRef.putFile(file);
+      } catch (e) {
+        print(e);
+      }
+    }
+
+    downloadPic() async {
+      try {
+        /// 参照の作成
+        String downloadName = 'image.png';
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('users/${currentUser.userID}/$downloadName');
+
+        currentUser.profilePictureURL = await storageRef.getDownloadURL();
+      } catch (e) {
+        print(e);
+      }
+    }
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -83,12 +83,12 @@ class _PhotoScreenState extends State<PhotoScreen> {
               ),
             ),
             Center(
-              child: imageUrl == null
+              child: currentUser.profilePictureURL == ''
                   ? Image.asset('assets/images/placeholder.png')
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: Image.network(
-                        imageUrl!,
+                        currentUser.profilePictureURL,
                         width: 200,
                         height: 200,
                         fit: BoxFit.fill,
@@ -146,7 +146,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => HomeScreen(imageUrl)),
+                          builder: (context) => const HomeScreen()),
                     );
                   },
                 ),

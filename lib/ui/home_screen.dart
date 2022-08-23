@@ -4,23 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/User.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
-  final String? imageUrl;
-  const HomeScreen(this.imageUrl, {Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  late String? imageUrl;
   @override
-  void initState() {
-    super.initState();
-
-    // 受け取ったデータを状態を管理する変数に格納
-    imageUrl = widget.imageUrl;
-  }
-
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(userModelProvider);
@@ -47,12 +38,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
               Center(
-                child: imageUrl == null
+                child: currentUser.profilePictureURL == null
                     ? Image.asset('assets/images/placeholder.png')
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.network(
-                          imageUrl!,
+                          currentUser.profilePictureURL,
                           width: 200,
                           height: 200,
                           fit: BoxFit.fill,

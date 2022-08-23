@@ -17,23 +17,26 @@ class User with ChangeNotifier {
 
   String residence;
 
+  String profilePictureURL;
+
   User({
     this.userID = "",
     this.name = "",
     this.bio = "",
     this.birthday = "",
     this.residence = "",
+    this.profilePictureURL = '',
   });
 
   //Firebaseからデータを取得する際の変換処理
   User.fromJson(Map<String, dynamic> json)
       : this(
-          userID: json['userID'],
-          name: json['name'],
-          bio: json['bio'],
-          birthday: json['birthday'],
-          residence: json['residence'],
-        );
+            userID: json['userID'],
+            name: json['name'],
+            bio: json['bio'],
+            birthday: json['birthday'],
+            residence: json['residence'],
+            profilePictureURL: json['profilePictureURL']);
 
   //DartのオブジェクトからFirebaseへ渡す際の変換処理
   Map<String, dynamic> toJson() {
@@ -43,6 +46,7 @@ class User with ChangeNotifier {
       'bio': bio,
       'birthday': birthday,
       'residence': residence,
+      'profilePictureURL': profilePictureURL,
     };
   }
 }

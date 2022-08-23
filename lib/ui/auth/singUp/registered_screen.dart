@@ -17,7 +17,6 @@ class RegisteredScreen extends ConsumerStatefulWidget {
 
 class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
   @override
-  @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(userModelProvider);
     //値更新用のuserクラス

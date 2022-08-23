@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instaflutter/constants.dart';
 
-import 'login_screen.dart';
+import 'login/login_screen.dart';
 import 'singUp/birthday_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {

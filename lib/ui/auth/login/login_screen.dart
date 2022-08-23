@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginScreen extends StatelessWidget {
+import 'otp_login_screen.dart';
+
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  @override
   Widget build(BuildContext context) {
+    String phone = '';
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -24,7 +33,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 const Text(
-                  'ログイン',
+                  '電話番号',
                   style: TextStyle(
                     fontSize: 24,
                     color: Color.fromARGB(255, 83, 83, 83),
@@ -36,6 +45,8 @@ class LoginScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.phone,
+                    maxLength: 11,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -48,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                         fontSize: 12,
                         color: Color.fromARGB(255, 97, 201, 196),
                       ),
-                      labelText: 'メールアドレス',
+                      labelText: '電話番号',
                       floatingLabelStyle: const TextStyle(fontSize: 12),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -58,33 +69,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 97, 201, 196),
-                          width: 2.0,
-                        ),
-                      ),
-                      labelStyle: const TextStyle(
-                        fontSize: 12,
-                        color: Color.fromARGB(255, 97, 201, 196),
-                      ),
-                      labelText: 'パスワード',
-                      floatingLabelStyle: const TextStyle(fontSize: 12),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 97, 201, 196),
-                          width: 1.0,
-                        ),
-                      ),
-                    ),
+                    onChanged: (String? val) {
+                      phone = "+81${val!}";
+                    },
                   ),
                 ),
               ],
@@ -104,14 +91,37 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'ログイン',
+                  '次',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Color(0xffFAFAFA),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  await showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: const Text("コードをこの番号に送信します"),
+                        content: Text(phone),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            child: const Text('OK'),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        OtpLoginScreen(phone)),
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ),

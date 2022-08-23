@@ -8,6 +8,7 @@ import 'package:instaflutter/constants.dart';
 import 'package:instaflutter/ui/home_screen.dart';
 
 import '../../../model/User.dart';
+import '../../../utils/FirebaseHelper.dart';
 
 class PhotoScreen extends ConsumerStatefulWidget {
   const PhotoScreen({Key? key}) : super(key: key);
@@ -142,7 +143,9 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
                       color: Color(0xffFAFAFA),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    //firestoreに値を更新
+                    await FireStoreUtils.updateCurrentUser(currentUser);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

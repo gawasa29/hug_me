@@ -20,11 +20,12 @@ dependencies:
   
 
   #state management
-  flutter_riverpod: ^1.0.4
+  flutter_riverpod: 1.0.4
   #splash screen
   flutter_native_splash: 2.2.6
   #image
-  image_picker: ^0.8.5+3
+  image_picker: 0.8.5+3
+  cached_network_image: 3.2.1
 
 #splash screen
 flutter_native_splash:

@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:instaflutter/constants.dart';
 
 import '../../model/User.dart';
+import '../../utils/helper.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(userModelProvider);
+    var age = ageCalculation(currentUser.birthday);
     uploadPic() async {
       try {
         /// 画像を選択
@@ -75,6 +77,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ),
         body: Column(
           children: <Widget>[
+            Text(
+              currentUser.name,
+              style: const TextStyle(
+                fontSize: 24,
+                color: Color.fromARGB(255, 83, 83, 83),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 16.0, left: 32, right: 32),
               child: Stack(
@@ -113,22 +122,84 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ],
               ),
             ),
-            Text(
-              currentUser.name,
-              style: const TextStyle(
-                fontSize: 24,
-                color: Color.fromARGB(255, 83, 83, 83),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                    left: 31,
+                  ),
+                  child: const Text("年齢",
+                      style:
+                          TextStyle(fontSize: 20, color: Color(COLOR_PRIMARY))),
+                ),
+                Container(
+                    padding: const EdgeInsets.only(
+                      right: 31,
+                    ),
+                    child: Text(age.toString(),
+                        style: const TextStyle(
+                            fontSize: 20, color: Color(COLOR_PRIMARY))))
+              ],
             ),
             const Divider(
-              height: 0.1,
+              color: Colors.black,
+              height: 30,
               thickness: 0.5,
-              indent: 1,
-              endIndent: 1,
+              indent: 30,
+              endIndent: 30,
             ),
-            Text(currentUser.birthday),
-            Text(currentUser.bio),
-            Text(currentUser.residence),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(left: 31),
+                  child: const Text("居住地",
+                      style:
+                          TextStyle(fontSize: 20, color: Color(COLOR_PRIMARY))),
+                ),
+                Container(
+                    padding: const EdgeInsets.only(right: 31),
+                    child: Text(currentUser.residence,
+                        style: const TextStyle(
+                            fontSize: 20, color: Color(COLOR_PRIMARY))))
+              ],
+            ),
+            const Divider(
+              color: Colors.black,
+              height: 30,
+              thickness: 0.5,
+              indent: 30,
+              endIndent: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: TextFormField(
+                maxLines: 6,
+                minLines: 6,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  hintText: currentUser.bio,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    borderSide: const BorderSide(
+                      width: 2,
+                      color: Colors.green,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    borderSide: const BorderSide(
+                      width: 2,
+                      color: Colors.green,
+                    ),
+                  ),
+                ),
+                onChanged: (String? val) {
+                  currentUser.bio = val!;
+                },
+              ),
+            ),
           ],
         ));
   }

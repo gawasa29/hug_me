@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instaflutter/constants.dart';
+import 'package:instaflutter/ui/profile/setting_screen.dart';
 
 import '../../model/User.dart';
 import '../../utils/helper.dart';
@@ -70,7 +71,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   Icons.settings,
                   size: 35,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingScreen()),
+                  );
+                },
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -101,12 +102,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         ? Image.asset('assets/images/placeholder.png')
                         : ClipRRect(
                             borderRadius: BorderRadius.circular(130),
-                            child: Image.network(
-                              currentUser.profilePictureURL,
+                            child: CachedNetworkImage(
+                              imageUrl: currentUser.profilePictureURL,
                               width: 150,
                               height: 150,
                               fit: BoxFit.fill,
-                            )),
+                            ),
+                          ),
                   ),
                   Positioned(
                     left: 80,

@@ -85,7 +85,11 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
             ),
             Center(
               child: currentUser.profilePictureURL == ''
-                  ? Image.asset('assets/images/placeholder.png')
+                  ? Image.asset(
+                      'assets/images/placeholder.png',
+                      width: 200,
+                      height: 200,
+                    )
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: Image.network(

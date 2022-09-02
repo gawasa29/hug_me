@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instaflutter/constants.dart';
+import 'package:instaflutter/ui/profile/photo_selection_screen.dart';
 import 'package:instaflutter/ui/profile/setting_screen.dart';
 
 import '../../model/User.dart';
@@ -122,9 +123,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ),
                       mini: true,
                       onPressed: () async {
-                        await uploadPic();
-                        await downloadPic();
-                        setState(() {});
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const PhotoSelectionScreen()),
+                        );
                       },
                     ),
                   )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'otpScreen.dart';
+import 'otp_screen.dart';
 
 class SingUpScreen extends ConsumerStatefulWidget {
   const SingUpScreen({Key? key}) : super(key: key);

@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instaflutter/ui/auth/welcome_screen.dart';
+import 'package:instaflutter/utils/FirebaseHelper.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -22,7 +25,14 @@ class SettingScreen extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 dense: true,
-                onTap: () {},
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen()),
+                  );
+                },
                 title: const Text(
                   'ログアウト',
                   style: TextStyle(fontSize: 16),
@@ -30,7 +40,14 @@ class SettingScreen extends StatelessWidget {
               ),
               ListTile(
                 dense: true,
-                onTap: () {},
+                onTap: () async {
+                  await FireStoreUtils.deleteUser();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen()),
+                  );
+                },
                 title: const Text(
                   'アカウント削除',
                   style: TextStyle(fontSize: 16),

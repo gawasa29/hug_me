@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:instaflutter/constants.dart';
 
 import '../../../model/User.dart';
 import '../../../utils/FirebaseHelper.dart';
+import '../../../utils/colors.dart';
 import 'bio_screen.dart';
 
 class RegisteredScreen extends ConsumerStatefulWidget {
@@ -24,11 +24,10 @@ class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white10,
+          backgroundColor: appBarColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-                  color: Theme.of(context).primaryColor),
+              icon: const Icon(Icons.arrow_back_ios_new, color: primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -49,7 +48,7 @@ class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
                         '登録',
                         style: TextStyle(
                           fontSize: 24,
-                          color: Color.fromARGB(255, 83, 83, 83),
+                          color: primaryTextColor,
                         ),
                       ),
                     ),
@@ -64,7 +63,7 @@ class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
                         'これからあなたに合った相手を見つける\nために、プロフィールを完成させましょう\n全て登録するとより多くの相手と出会う\nことができます。',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Color.fromARGB(255, 191, 191, 191),
+                          color: secondaryTextColor,
                         ),
                       ),
                     ),
@@ -82,18 +81,17 @@ class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 97, 201, 196),
+                    primary: primaryColor,
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(color: Color(mainColor))),
+                        side: const BorderSide(color: primaryColor)),
                   ),
                   child: const Text(
                     'アカウントを登録',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffFAFAFA),
                     ),
                   ),
                   onPressed: () async {

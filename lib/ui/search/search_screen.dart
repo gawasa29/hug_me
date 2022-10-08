@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instaflutter/model/User.dart';
 
+import '../../utils/colors.dart';
+
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
@@ -60,7 +62,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       "愛知県 20歳",
                       style: TextStyle(
                         fontSize: 20,
-                        color: Color.fromARGB(255, 83, 83, 83),
+                        color: primaryTextColor,
                       ),
                     ),
                   ),
@@ -71,7 +73,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       "はなこ",
                       style: TextStyle(
                         fontSize: 20,
-                        color: Color.fromARGB(255, 83, 83, 83),
+                        color: primaryTextColor,
                       ),
                     ),
                   ),

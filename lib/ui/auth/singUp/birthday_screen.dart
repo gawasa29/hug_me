@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:instaflutter/constants.dart';
 import 'package:intl/intl.dart';
 
 import '../../../model/User.dart';
+import '../../../utils/colors.dart';
 import 'residence_screen.dart';
 
 class BirthdayScreen extends ConsumerStatefulWidget {
@@ -40,11 +40,10 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white10,
+          backgroundColor: appBarColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-                  color: Theme.of(context).primaryColor),
+              icon: const Icon(Icons.arrow_back_ios_new, color: primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -65,7 +64,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
                         '生年月日',
                         style: TextStyle(
                           fontSize: 24,
-                          color: Color.fromARGB(255, 83, 83, 83),
+                          color: primaryTextColor,
                         ),
                       ),
                     ),
@@ -80,7 +79,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
                         '8文字以内で入力してください。ニックネームは後から変更可能です。',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Color.fromARGB(255, 191, 191, 191),
+                          color: secondaryTextColor,
                         ),
                       ),
                     ),
@@ -91,7 +90,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
                       style: const TextStyle(
                         decoration: TextDecoration.underline,
                         fontSize: 30,
-                        color: Color.fromARGB(255, 83, 83, 83),
+                        color: primaryTextColor,
                       ),
                     ),
                     onPressed: () {
@@ -118,18 +117,17 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 97, 201, 196),
+                    primary: primaryColor,
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(color: Color(mainColor))),
+                        side: const BorderSide(color: primaryColor)),
                   ),
                   child: const Text(
                     '次',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffFAFAFA),
                     ),
                   ),
                   onPressed: () {

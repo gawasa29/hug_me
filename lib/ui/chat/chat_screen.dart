@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/colors.dart';
+
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
@@ -8,7 +10,7 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white10,
+          backgroundColor: appBarColor,
           automaticallyImplyLeading: false,
         ),
         body: Center(

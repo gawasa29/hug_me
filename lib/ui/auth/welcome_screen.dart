@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instaflutter/constants.dart';
 
+import '../../utils/colors.dart';
 import 'login/login_screen.dart';
 import 'singUp/birthday_screen.dart';
 
@@ -10,9 +10,8 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFAFAFA),
       appBar: AppBar(
-        backgroundColor: const Color(0xffFAFAFA),
+        backgroundColor: appBarColor,
         elevation: 0,
       ),
       body: Column(
@@ -27,18 +26,17 @@ class WelcomeScreen extends StatelessWidget {
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: const Color(mainColor),
+                  primary: primaryColor,
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      side: const BorderSide(color: Color(mainColor))),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                 ),
                 child: const Text(
                   'さっそくはじめる',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xffFAFAFA),
                   ),
                 ),
                 onPressed: () {
@@ -57,18 +55,17 @@ class WelcomeScreen extends StatelessWidget {
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: const Color(mainColor),
+                  primary: primaryColor,
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      side: const BorderSide(color: Color(mainColor))),
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                 ),
                 child: const Text(
                   'ログイン',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xffFAFAFA),
                   ),
                 ),
                 onPressed: () {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../utils/colors.dart';
 import 'otp_screen.dart';
 
 class SingUpScreen extends ConsumerStatefulWidget {
@@ -17,11 +18,10 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white10,
+        backgroundColor: appBarColor,
         automaticallyImplyLeading: false,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new,
-                color: Theme.of(context).primaryColor),
+            icon: const Icon(Icons.arrow_back_ios_new, color: primaryColor),
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -36,7 +36,7 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
                   '電話番号',
                   style: TextStyle(
                     fontSize: 24,
-                    color: Color.fromARGB(255, 83, 83, 83),
+                    color: primaryTextColor,
                   ),
                 ),
                 const SizedBox(
@@ -51,20 +51,20 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
                         borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 97, 201, 196),
+                          color: primaryColor,
                           width: 2.0,
                         ),
                       ),
                       labelStyle: const TextStyle(
                         fontSize: 12,
-                        color: Color.fromARGB(255, 97, 201, 196),
+                        color: primaryColor,
                       ),
                       labelText: '電話番号',
                       floatingLabelStyle: const TextStyle(fontSize: 12),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
                         borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 97, 201, 196),
+                          color: primaryColor,
                           width: 1.0,
                         ),
                       ),
@@ -84,7 +84,7 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 97, 201, 196),
+                  primary: primaryColor,
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
@@ -95,7 +95,6 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xffFAFAFA),
                   ),
                 ),
                 onPressed: () async {

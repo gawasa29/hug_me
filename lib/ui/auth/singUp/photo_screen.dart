@@ -4,11 +4,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instaflutter/constants.dart';
 import 'package:instaflutter/ui/home_screen.dart';
 
 import '../../../model/User.dart';
 import '../../../utils/FirebaseHelper.dart';
+import '../../../utils/colors.dart';
 
 class PhotoScreen extends ConsumerStatefulWidget {
   const PhotoScreen({Key? key}) : super(key: key);
@@ -58,11 +58,10 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white10,
+          backgroundColor: appBarColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-                  color: Theme.of(context).primaryColor),
+              icon: const Icon(Icons.arrow_back_ios_new, color: primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -73,14 +72,14 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
               '写真を登録しましょう',
               style: TextStyle(
                 fontSize: 24,
-                color: Color.fromARGB(255, 83, 83, 83),
+                color: primaryTextColor,
               ),
             ),
             const Text(
               '写真を登録するとマッチング率がアップします。',
               style: TextStyle(
                 fontSize: 15,
-                color: Color.fromARGB(255, 83, 83, 83),
+                color: primaryTextColor,
               ),
             ),
             Center(
@@ -105,18 +104,17 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 97, 201, 196),
+                    primary: primaryColor,
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(color: Color(mainColor))),
+                        side: const BorderSide(color: primaryColor)),
                   ),
                   child: const Text(
                     '写真をアップロード',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffFAFAFA),
                     ),
                   ),
                   onPressed: () async {
@@ -133,18 +131,17 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 97, 201, 196),
+                    primary: primaryColor,
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(color: Color(mainColor))),
+                        side: const BorderSide(color: primaryColor)),
                   ),
                   child: const Text(
                     '次',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffFAFAFA),
                     ),
                   ),
                   onPressed: () async {

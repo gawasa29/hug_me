@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instaflutter/constants.dart';
 
+import '../../../utils/colors.dart';
 import 'registered_screen.dart';
 
 class StartScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white10,
+          backgroundColor: appBarColor,
           automaticallyImplyLeading: false,
         ),
         body: Column(
@@ -37,7 +37,7 @@ class _StartScreenState extends State<StartScreen> {
                         'さあ、始めましょう！',
                         style: TextStyle(
                           fontSize: 24,
-                          color: Color.fromARGB(255, 83, 83, 83),
+                          color: primaryTextColor,
                         ),
                       ),
                     ),
@@ -52,7 +52,7 @@ class _StartScreenState extends State<StartScreen> {
                         'Hug me!はハグする相手を見つけられる\nマッチングアプリです。',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Color.fromARGB(255, 191, 191, 191),
+                          color: secondaryTextColor,
                         ),
                       ),
                     ),
@@ -70,7 +70,7 @@ class _StartScreenState extends State<StartScreen> {
                   '利用規約及びコミュニティガイドライン、\nプライバシーポリシーへの同意が必要となります。',
                   style: TextStyle(
                     fontSize: 15,
-                    color: Color.fromARGB(255, 191, 191, 191),
+                    color: secondaryTextColor,
                   ),
                 ),
               ),
@@ -128,19 +128,18 @@ class _StartScreenState extends State<StartScreen> {
                     style: ElevatedButton.styleFrom(
                       //三項演算子で色変える
                       primary: (isChecked && isChecked2)
-                          ? const Color.fromARGB(255, 97, 201, 196)
+                          ? primaryColor
                           : Colors.blueAccent,
                       padding: const EdgeInsets.only(top: 12, bottom: 12),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0),
-                          side: const BorderSide(color: Color(mainColor))),
+                          side: const BorderSide(color: primaryColor)),
                     ),
                     child: const Text(
                       '次へ',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xffFAFAFA),
                       ),
                     ),
                     //三項演算子でisCheckedとisChecked2がどっちもtrueでボタン押せる

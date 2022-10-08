@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:instaflutter/ui/auth/welcome_screen.dart';
 import 'package:instaflutter/utils/FirebaseHelper.dart';
 
+import '../../utils/colors.dart';
+
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
 
@@ -11,11 +13,10 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white10,
+          backgroundColor: appBarColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-                  color: Theme.of(context).primaryColor),
+              icon: const Icon(Icons.arrow_back_ios_new, color: primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),

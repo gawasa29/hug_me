@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:instaflutter/constants.dart';
 
 import '../../../model/User.dart';
 import '../../../utils/FirebaseHelper.dart';
+import '../../../utils/colors.dart';
 import 'photo_screen.dart';
 
 class BioScreen extends ConsumerWidget {
@@ -15,11 +15,12 @@ class BioScreen extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white10,
+          backgroundColor: appBarColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-                  color: Theme.of(context).primaryColor),
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -40,7 +41,7 @@ class BioScreen extends ConsumerWidget {
                         'プロフィールを入力しましょう',
                         style: TextStyle(
                           fontSize: 24,
-                          color: Color.fromARGB(255, 83, 83, 83),
+                          color: primaryTextColor,
                         ),
                       ),
                     ),
@@ -55,7 +56,7 @@ class BioScreen extends ConsumerWidget {
                         'あなたの趣味や興味のあることを入力しましょう。後からでも変更できます。',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Color.fromARGB(255, 191, 191, 191),
+                          color: secondaryTextColor,
                         ),
                       ),
                     ),
@@ -72,14 +73,14 @@ class BioScreen extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(0),
                           borderSide: const BorderSide(
                             width: 2,
-                            color: Colors.green,
+                            color: primaryColor,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(0),
                           borderSide: const BorderSide(
                             width: 2,
-                            color: Colors.green,
+                            color: primaryColor,
                           ),
                         ),
                       ),
@@ -98,18 +99,17 @@ class BioScreen extends ConsumerWidget {
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 97, 201, 196),
+                    primary: primaryColor,
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(color: Color(mainColor))),
+                        side: const BorderSide(color: primaryColor)),
                   ),
                   child: const Text(
                     '次',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xffFAFAFA),
                     ),
                   ),
                   onPressed: () async {

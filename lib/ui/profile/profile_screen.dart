@@ -9,6 +9,7 @@ import 'package:instaflutter/constants.dart';
 import 'package:instaflutter/ui/profile/setting_screen.dart';
 
 import '../../model/User.dart';
+import '../../utils/colors.dart';
 import '../../utils/helper.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -67,7 +68,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                color: const Color.fromARGB(255, 83, 83, 83),
+                color: primaryTextColor,
                 icon: const Icon(
                   Icons.settings,
                   size: 35,
@@ -89,7 +90,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               currentUser.name,
               style: const TextStyle(
                 fontSize: 24,
-                color: Color.fromARGB(255, 83, 83, 83),
+                color: primaryTextColor,
               ),
             ),
             Padding(
@@ -115,10 +116,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     right: 0,
                     child: FloatingActionButton(
                       heroTag: 'pickImage',
-                      backgroundColor: const Color(mainColor),
+                      backgroundColor: primaryColor,
                       child: const Icon(
                         Icons.camera_alt,
-                        color: Color(0xffFAFAFA),
                       ),
                       mini: true,
                       onPressed: () async {

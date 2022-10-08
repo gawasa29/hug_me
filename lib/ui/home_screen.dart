@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../utils/colors.dart';
 import 'chat/chat_screen.dart';
 import 'profile/profile_screen.dart';
 import 'search/search_screen.dart';
@@ -66,7 +67,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           );
         },
         currentIndex: _navIndex,
-        backgroundColor: const Color.fromARGB(255, 97, 201, 196),
+        backgroundColor: primaryColor,
         iconSize: 40,
       ),
       body: SafeArea(child: _currentWidget),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../model/User.dart';
+import '../../../utils/colors.dart';
 import 'sing_up_screen.dart';
 
 class NameScreen extends ConsumerStatefulWidget {
@@ -19,11 +20,10 @@ class _NameScreenState extends ConsumerState<NameScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white10,
+        backgroundColor: appBarColor,
         automaticallyImplyLeading: false,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new,
-                color: Theme.of(context).primaryColor),
+            icon: const Icon(Icons.arrow_back_ios_new, color: primaryColor),
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -45,7 +45,7 @@ class _NameScreenState extends ConsumerState<NameScreen> {
                       'ニックネーム',
                       style: TextStyle(
                         fontSize: 24,
-                        color: Color.fromARGB(255, 83, 83, 83),
+                        color: primaryTextColor,
                       ),
                     ),
                   ),
@@ -60,7 +60,7 @@ class _NameScreenState extends ConsumerState<NameScreen> {
                       '8文字以内で入力してください。\nニックネームは後から変更可能です。',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Color.fromARGB(255, 191, 191, 191),
+                        color: secondaryTextColor,
                       ),
                     ),
                   ),
@@ -68,7 +68,10 @@ class _NameScreenState extends ConsumerState<NameScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 40.0, right: 70),
                   child: TextFormField(
-                    decoration: const InputDecoration(hintText: 'Momo'),
+                    // ignore: prefer_const_constructors
+                    decoration: InputDecoration(
+                      hintText: 'Momo',
+                    ),
                     onChanged: (String? val) {
                       currentUser.name = val!;
                     },
@@ -84,7 +87,7 @@ class _NameScreenState extends ConsumerState<NameScreen> {
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 97, 201, 196),
+                  primary: primaryColor,
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
@@ -95,7 +98,6 @@ class _NameScreenState extends ConsumerState<NameScreen> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xffFAFAFA),
                   ),
                 ),
                 onPressed: () {

@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instaflutter/model/User.dart';
 
+import '../../utils/FirebaseHelper.dart';
 import '../../utils/colors.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
@@ -36,53 +38,63 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   border: InputBorder.none),
             ),
           )),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisExtent: 250,
-        ),
-        itemBuilder: (context, index) {
-          return Card(
-            child: InkWell(
-              onTap: () {
-                print(index);
-              },
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 80,
-                    backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1491349174775-aaafddd81942?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNTgwfDB8MXxzZWFyY2h8MTB8fHBlcnNvbnxlbnwwfHx8fDE2NjUxNTA1MzA&ixlib=rb-1.2.1&q=80&w=400'),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      textAlign: TextAlign.left,
-                      "愛知県 20歳",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: primaryTextColor,
+      body: FutureBuilder<QuerySnapshot<Map<String, dynamic>>?>(
+          future: FireStoreUtils.fetchUsers(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisExtent: 250,
+                ),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  var data = snapshot.data!.docs[index].data();
+                  return Card(
+                    child: InkWell(
+                      onTap: () {
+                        FireStoreUtils.createRoom(
+                            data['userID'], currentUser.userID);
+                      },
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 80,
+                            backgroundColor: Colors.white,
+                            backgroundImage:
+                                NetworkImage(data['profilePictureURL']),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              textAlign: TextAlign.left,
+                              "愛知県 20歳",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: primaryTextColor,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              data['name'],
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: primaryTextColor,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      textAlign: TextAlign.left,
-                      "はなこ",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: primaryTextColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+                  );
+                },
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          }),
     );
   }
 }

@@ -85,4 +85,29 @@ class FireStoreUtils {
 
     return talkRooms;
   }
+
+  static Stream<QuerySnapshot> fetchMessageSnapshot(String roomId) {
+    return FirebaseFirestore.instance
+        .collection("room")
+        .doc(roomId)
+        .collection('message')
+        //orderBy（特定の条件で並べ替える）チャットのメッセージを時間ごとで表示したいから並び替えるorderByを使っている。
+        .orderBy('send_time', descending: true)
+        .snapshots();
+  }
+
+  static Future<void> sendMessage(
+      {required String roomId, required String message}) async {
+    final messageCollection = FirebaseFirestore.instance
+        .collection("room")
+        .doc(roomId)
+        .collection('message');
+    print(auth.FirebaseAuth.instance.currentUser!.runtimeType);
+
+    await messageCollection.add({
+      'message': message,
+      'sender_id': auth.FirebaseAuth.instance.currentUser!.uid,
+      'send_time': Timestamp.now()
+    });
+  }
 }

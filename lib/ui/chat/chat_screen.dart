@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../model/Chat_room.dart';
 import '../../utils/FirebaseHelper.dart';
+import 'chat_room_screen.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -32,7 +33,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              print(chatRooms[index].roomId);
+                              print('トークルームIDは${chatRooms[index].roomId}');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChatRoomScreen(chatRooms[index])),
+                              );
                             },
                             child: SizedBox(
                               height: 70,
@@ -44,13 +51,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                     child: CircleAvatar(
                                       radius: 30,
                                       backgroundImage: chatRooms[index]
-                                                  .talkUser
+                                                  .talkUser!
                                                   .profilePictureURL ==
                                               null
                                           ? const AssetImage(
                                               'assets/images/placeholder.png')
                                           : NetworkImage(chatRooms[index]
-                                                  .talkUser
+                                                  .talkUser!
                                                   .profilePictureURL)
                                               as ImageProvider,
                                     ),
@@ -61,7 +68,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        chatRooms[index].talkUser.name,
+                                        chatRooms[index].talkUser!.name,
                                         style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),

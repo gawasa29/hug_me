@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 import '../../model/Chat_room.dart';
 import '../../model/Message.dart';
 import '../../utils/FirebaseHelper.dart';
+import '../../utils/colors.dart';
 
 class ChatRoomScreen extends ConsumerStatefulWidget {
   final ChatRoom chatRoom;
@@ -24,10 +25,10 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
         backgroundColor: Colors.lightBlueAccent,
         appBar: AppBar(
           title: Text(widget.chatRoom.talkUser!.name),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-              ),
+              icon: const Icon(Icons.arrow_back_ios_new, color: appBarColor),
               onPressed: () {
                 Navigator.pop(context);
               }),

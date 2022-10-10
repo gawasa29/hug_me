@@ -1,15 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instaflutter/ui/auth/welcome_screen.dart';
 import 'package:instaflutter/utils/FirebaseHelper.dart';
 
+import '../../model/User.dart';
 import '../../utils/colors.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends ConsumerWidget {
   const SettingScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(userModelProvider);
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -28,6 +31,7 @@ class SettingScreen extends StatelessWidget {
                 dense: true,
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -43,6 +47,7 @@ class SettingScreen extends StatelessWidget {
                 dense: true,
                 onTap: () async {
                   await FireStoreUtils.deleteUser();
+                  currentUser.dispose();
                   Navigator.push(
                     context,
                     MaterialPageRoute(

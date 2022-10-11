@@ -58,158 +58,166 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       }
     }
 
-    return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          //ちょい透かし
-          backgroundColor: Colors.white.withOpacity(0.0),
-          elevation: 0,
-          actions: <Widget>[
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                color: primaryTextColor,
-                icon: const Icon(
-                  Icons.settings,
-                  size: 35,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SettingScreen()),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-        body: Column(
-          children: <Widget>[
-            Text(
-              currentUser.name,
-              style: const TextStyle(
-                fontSize: 24,
-                color: primaryTextColor,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 32, right: 32),
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: <Widget>[
-                  Center(
-                    child: currentUser.profilePictureURL == null
-                        ? Image.asset('assets/images/placeholder.png')
-                        : ClipRRect(
-                            borderRadius: BorderRadius.circular(130),
-                            child: CachedNetworkImage(
-                              imageUrl: currentUser.profilePictureURL,
-                              width: 150,
-                              height: 150,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            //ちょい透かし
+            backgroundColor: Colors.white.withOpacity(0.0),
+            elevation: 0,
+            actions: <Widget>[
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  color: primaryTextColor,
+                  icon: const Icon(
+                    Icons.settings,
+                    size: 35,
                   ),
-                  Positioned(
-                    left: 80,
-                    right: 0,
-                    child: FloatingActionButton(
-                      heroTag: 'pickImage',
-                      backgroundColor: primaryColor,
-                      child: const Icon(
-                        Icons.camera_alt,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingScreen()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  currentUser.name,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    color: primaryTextColor,
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(top: 16.0, left: 32, right: 32),
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: <Widget>[
+                      Center(
+                        child: currentUser.profilePictureURL == null
+                            ? Image.asset('assets/images/placeholder.png')
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(130),
+                                child: CachedNetworkImage(
+                                  imageUrl: currentUser.profilePictureURL,
+                                  width: 150,
+                                  height: 150,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                       ),
-                      mini: true,
-                      onPressed: () async {
-                        await uploadPic();
-                        await downloadPic();
-                        setState(() {});
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(
-                    left: 31,
+                      Positioned(
+                        left: 80,
+                        right: 0,
+                        child: FloatingActionButton(
+                          heroTag: 'pickImage',
+                          backgroundColor: primaryColor,
+                          child: const Icon(
+                            Icons.camera_alt,
+                          ),
+                          mini: true,
+                          onPressed: () async {
+                            await uploadPic();
+                            await downloadPic();
+                            setState(() {});
+                          },
+                        ),
+                      )
+                    ],
                   ),
-                  child: const Text("年齢",
-                      style:
-                          TextStyle(fontSize: 20, color: Color(COLOR_PRIMARY))),
                 ),
-                Container(
-                    padding: const EdgeInsets.only(
-                      right: 31,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: 31,
+                      ),
+                      child: const Text("年齢",
+                          style: TextStyle(
+                              fontSize: 20, color: Color(COLOR_PRIMARY))),
                     ),
-                    child: Text(age.toString(),
-                        style: const TextStyle(
-                            fontSize: 20, color: Color(COLOR_PRIMARY))))
+                    Container(
+                        padding: const EdgeInsets.only(
+                          right: 31,
+                        ),
+                        child: Text(age.toString(),
+                            style: const TextStyle(
+                                fontSize: 20, color: Color(COLOR_PRIMARY))))
+                  ],
+                ),
+                const Divider(
+                  color: Colors.black,
+                  height: 30,
+                  thickness: 0.5,
+                  indent: 30,
+                  endIndent: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(left: 31),
+                      child: const Text("居住地",
+                          style: TextStyle(
+                              fontSize: 20, color: Color(COLOR_PRIMARY))),
+                    ),
+                    Container(
+                        padding: const EdgeInsets.only(right: 31),
+                        child: Text(currentUser.residence,
+                            style: const TextStyle(
+                                fontSize: 20, color: Color(COLOR_PRIMARY))))
+                  ],
+                ),
+                const Divider(
+                  color: Colors.black,
+                  height: 30,
+                  thickness: 0.5,
+                  indent: 30,
+                  endIndent: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: TextFormField(
+                    maxLines: 6,
+                    minLines: 6,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: currentUser.bio,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0),
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.green,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(0),
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                    onChanged: (String? val) {
+                      currentUser.bio = val!;
+                    },
+                  ),
+                ),
               ],
             ),
-            const Divider(
-              color: Colors.black,
-              height: 30,
-              thickness: 0.5,
-              indent: 30,
-              endIndent: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(left: 31),
-                  child: const Text("居住地",
-                      style:
-                          TextStyle(fontSize: 20, color: Color(COLOR_PRIMARY))),
-                ),
-                Container(
-                    padding: const EdgeInsets.only(right: 31),
-                    child: Text(currentUser.residence,
-                        style: const TextStyle(
-                            fontSize: 20, color: Color(COLOR_PRIMARY))))
-              ],
-            ),
-            const Divider(
-              color: Colors.black,
-              height: 30,
-              thickness: 0.5,
-              indent: 30,
-              endIndent: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: TextFormField(
-                maxLines: 6,
-                minLines: 6,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  hintText: currentUser.bio,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: const BorderSide(
-                      width: 2,
-                      color: Colors.green,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: const BorderSide(
-                      width: 2,
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-                onChanged: (String? val) {
-                  currentUser.bio = val!;
-                },
-              ),
-            ),
-          ],
-        ));
+          )),
+    );
   }
 }

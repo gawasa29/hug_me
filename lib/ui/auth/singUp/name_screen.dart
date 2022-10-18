@@ -49,6 +49,7 @@ class _NameScreenState extends ConsumerState<NameScreen> {
                         textAlign: TextAlign.left,
                         'ニックネーム',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 24,
                           color: primaryTextColor,
                         ),
@@ -73,9 +74,14 @@ class _NameScreenState extends ConsumerState<NameScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 40.0, right: 70),
                     child: TextFormField(
-                      // ignore: prefer_const_constructors
-                      decoration: InputDecoration(
-                        hintText: 'Momo',
+                      cursorColor: primaryColor,
+                      decoration: const InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: primaryColor,
+                          ),
+                        ),
+                        hintText: '例:Momo',
                       ),
                       onChanged: (String? val) {
                         currentUser.name = val!;
@@ -87,7 +93,7 @@ class _NameScreenState extends ConsumerState<NameScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
+                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 60),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(

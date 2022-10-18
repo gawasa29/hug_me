@@ -71,35 +71,42 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
             const Text(
               '写真を登録しましょう',
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 fontSize: 24,
                 color: primaryTextColor,
               ),
             ),
             const Text(
-              '写真を登録するとマッチング率がアップします。',
+              '写真を登録すると\nマッチング率がアップします。',
               style: TextStyle(
                 fontSize: 15,
-                color: primaryTextColor,
+                color: secondaryTextColor,
               ),
             ),
-            Center(
-              child: currentUser.profilePictureURL == ''
-                  ? Image.asset(
-                      'assets/images/placeholder.png',
-                      width: 200,
-                      height: 200,
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.network(
-                        currentUser.profilePictureURL,
+            Padding(
+              padding: const EdgeInsets.only(top: 40, bottom: 40),
+              child: Center(
+                child: currentUser.profilePictureURL == ''
+                    ? Image.asset(
+                        'assets/images/placeholder.png',
                         width: 200,
                         height: 200,
-                        fit: BoxFit.fill,
-                      )),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(
+                          currentUser.profilePictureURL,
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.fill,
+                        )),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 40.0, left: 40.0, top: 40),
+              padding: const EdgeInsets.only(
+                right: 40.0,
+                left: 40.0,
+              ),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(

@@ -45,6 +45,7 @@ class BioScreen extends ConsumerWidget {
                             textAlign: TextAlign.left,
                             'プロフィールを入力しましょう',
                             style: TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 24,
                               color: primaryTextColor,
                             ),
@@ -72,6 +73,7 @@ class BioScreen extends ConsumerWidget {
                           maxLines: 6,
                           minLines: 6,
                           keyboardType: TextInputType.multiline,
+                          cursorColor: primaryColor,
                           decoration: InputDecoration(
                             hintText: '初めまして！',
                             enabledBorder: OutlineInputBorder(

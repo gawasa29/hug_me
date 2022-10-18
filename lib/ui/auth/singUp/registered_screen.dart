@@ -36,24 +36,23 @@ class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
           children: <Widget>[
             Expanded(
               child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      left: 40.0,
-                    ),
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(left: 40.0, bottom: 10),
                     child: SizedBox(
                       width: double.infinity,
                       child: Text(
                         textAlign: TextAlign.left,
                         '登録',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 24,
                           color: primaryTextColor,
                         ),
                       ),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(
                       left: 40.0,
                     ),
@@ -68,15 +67,12 @@ class _RegisteredScreenState extends ConsumerState<RegisteredScreen> {
                       ),
                     ),
                   ),
-                  Center(
-                    child: Image.asset('assets//images/hug_photo.png'),
-                  ),
                 ],
               ),
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
+                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 60),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(

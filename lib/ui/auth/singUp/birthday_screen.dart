@@ -63,6 +63,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
                         textAlign: TextAlign.left,
                         '生年月日',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 24,
                           color: primaryTextColor,
                         ),
@@ -70,13 +71,11 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(
-                      left: 40.0,
-                    ),
+                    padding: EdgeInsets.only(left: 40.0, bottom: 20),
                     child: SizedBox(
                       width: double.infinity,
                       child: Text(
-                        '8文字以内で入力してください。ニックネームは後から変更可能です。',
+                        '後から変更できません。',
                         style: TextStyle(
                           fontSize: 15,
                           color: secondaryTextColor,
@@ -112,7 +111,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
+                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 60),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(

@@ -32,7 +32,7 @@ dependencies:
 flutter_native_splash:
   image: assets/images/hug_me_logo_white.png
   color: "#61C9C3"
-  color_dark: "#042a49"
+  color_dark: "#61C9C3"
   image_dark: assets/images/hug_me_logo_white.png
   android_12:
   fullscreen: true

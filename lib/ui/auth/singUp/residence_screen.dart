@@ -91,6 +91,7 @@ class _ResidenceScreenState extends ConsumerState<ResidenceScreen> {
                 const Text(
                   '居住地',
                   style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     fontSize: 24,
                     color: primaryTextColor,
                   ),
@@ -115,8 +116,7 @@ class _ResidenceScreenState extends ConsumerState<ResidenceScreen> {
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
+            padding: const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 60),
             child: ConstrainedBox(
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: ElevatedButton(

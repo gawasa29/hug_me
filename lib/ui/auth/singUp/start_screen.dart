@@ -36,6 +36,7 @@ class _StartScreenState extends State<StartScreen> {
                         textAlign: TextAlign.left,
                         'さあ、始めましょう！',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 24,
                           color: primaryTextColor,
                         ),
@@ -88,12 +89,22 @@ class _StartScreenState extends State<StartScreen> {
                     },
                   ),
                 ),
-                const Text(
-                  '私は女性です',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                TextButton(
+                  child: const Text(
+                    '私は女性です',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
                   ),
+                  onPressed: () {
+                    if (isChecked) {
+                      isChecked = false;
+                    } else {
+                      isChecked = true;
+                    }
+                    setState(() {});
+                  },
                 ),
               ],
             ),
@@ -110,18 +121,28 @@ class _StartScreenState extends State<StartScreen> {
                     },
                   ),
                 ),
-                const Text(
-                  '全ての規約に同意します',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                TextButton(
+                  child: const Text(
+                    '全ての規約に同意します',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
                   ),
+                  onPressed: () {
+                    if (isChecked2) {
+                      isChecked2 = false;
+                    } else {
+                      isChecked2 = true;
+                    }
+                    setState(() {});
+                  },
                 ),
               ],
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
+                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 60),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(
@@ -132,8 +153,8 @@ class _StartScreenState extends State<StartScreen> {
                           : Colors.blueAccent,
                       padding: const EdgeInsets.only(top: 12, bottom: 12),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          side: const BorderSide(color: primaryColor)),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
                     ),
                     child: const Text(
                       '次へ',

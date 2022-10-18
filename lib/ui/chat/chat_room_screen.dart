@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:instaflutter/utils/colors.dart';
 import 'package:intl/intl.dart' as intl;
 
 import '../../model/Chat_room.dart';
@@ -25,10 +26,10 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-          backgroundColor: Colors.lightBlueAccent,
+          backgroundColor: Color.fromARGB(255, 228, 249, 247),
           appBar: AppBar(
             title: Text(widget.chatRoom.talkUser!.name),
-            backgroundColor: Colors.transparent,
+            backgroundColor: primaryColor,
             elevation: 0,
             leading: IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
@@ -82,7 +83,7 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                                                 0.6),
                                         decoration: BoxDecoration(
                                             color: message.isMe
-                                                ? Colors.green
+                                                ? primaryColor
                                                 : Colors.white,
                                             borderRadius:
                                                 BorderRadius.circular(15)),

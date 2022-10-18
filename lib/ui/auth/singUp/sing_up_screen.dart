@@ -39,6 +39,7 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
                   const Text(
                     '電話番号',
                     style: TextStyle(
+                      fontWeight: FontWeight.bold,
                       fontSize: 24,
                       color: primaryTextColor,
                     ),
@@ -51,6 +52,7 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
                     child: TextFormField(
                       keyboardType: TextInputType.phone,
                       maxLength: 11,
+                      cursorColor: primaryColor,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -64,7 +66,8 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
                           color: primaryColor,
                         ),
                         labelText: '電話番号',
-                        floatingLabelStyle: const TextStyle(fontSize: 12),
+                        floatingLabelStyle:
+                            const TextStyle(fontSize: 12, color: primaryColor),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: const BorderSide(
@@ -83,7 +86,7 @@ class _SingUpScreenState extends ConsumerState<SingUpScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 100),
+                  const EdgeInsets.only(right: 40.0, left: 40.0, bottom: 60),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 child: ElevatedButton(

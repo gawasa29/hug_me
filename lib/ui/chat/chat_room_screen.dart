@@ -125,10 +125,12 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                         ),
                         IconButton(
                             onPressed: () {
-                              FireStoreUtils.sendMessage(
-                                  roomId: widget.chatRoom.roomId,
-                                  message: controller.text);
-                              controller.clear();
+                              if (controller.text != '') {
+                                FireStoreUtils.sendMessage(
+                                    roomId: widget.chatRoom.roomId,
+                                    message: controller.text);
+                                controller.clear();
+                              }
                             },
                             icon: const Icon(Icons.send))
                       ],

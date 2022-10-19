@@ -77,9 +77,9 @@ class FireStoreUtils {
       User? talkUser = await getCurrentUser(talkUserUid);
       if (talkUser == null) return null;
       final talkRoom = ChatRoom(
-        roomId: doc.id,
-        talkUser: talkUser,
-      );
+          roomId: doc.id,
+          talkUser: talkUser,
+          lastMessage: data['last_message']);
       talkRooms.add(talkRoom);
     }
 
@@ -102,12 +102,15 @@ class FireStoreUtils {
         .collection("room")
         .doc(roomId)
         .collection('message');
-    print(auth.FirebaseAuth.instance.currentUser!.runtimeType);
 
     await messageCollection.add({
       'message': message,
       'sender_id': auth.FirebaseAuth.instance.currentUser!.uid,
       'send_time': Timestamp.now()
     });
+    FirebaseFirestore.instance
+        .collection("room")
+        .doc(roomId)
+        .update({'last_message': message});
   }
 }

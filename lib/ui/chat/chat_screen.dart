@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:instaflutter/utils/colors.dart';
 
 import '../../model/Chat_room.dart';
 import '../../utils/FirebaseHelper.dart';
@@ -28,12 +29,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   builder: (context, futereSnapshot) {
                     if (futereSnapshot.hasData) {
                       List<ChatRoom> chatRooms = futereSnapshot.data!;
+                      print(chatRooms);
                       return ListView.builder(
                         itemCount: chatRooms.length,
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              print('トークルームIDは${chatRooms[index].roomId}');
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -73,6 +74,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
+                                      Text(
+                                        chatRooms[index].lastMessage ?? '',
+                                        style: const TextStyle(
+                                            color: secondaryTextColor),
+                                      )
                                     ],
                                   ),
                                 ],

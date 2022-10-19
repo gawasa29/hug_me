@@ -28,12 +28,12 @@ dependencies:
   cached_network_image: 3.2.1
   #横須ワイプアニメーション
   smooth_page_indicator: ^1.0.0+2
+  #使えるアイコン増やす
+  font_awesome_flutter: ^10.2.1
 #splash screen
 flutter_native_splash:
   image: assets/images/hug_me_logo_white.png
   color: "#61C9C3"
-  color_dark: "#61C9C3"
-  image_dark: assets/images/hug_me_logo_white.png
   android_12:
   fullscreen: true
 

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instaflutter/utils/colors.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -108,31 +109,47 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                 children: [
                   Container(
                     color: Colors.white,
-                    height: 60,
                     child: Row(
-                      children: [
+                      children: <Widget>[
+                        IconButton(
+                          icon: const FaIcon(
+                            FontAwesomeIcons.image,
+                            color: primaryColor,
+                          ),
+                          onPressed: () {},
+                        ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10),
                             child: TextField(
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
                               controller: controller,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 10),
-                                border: OutlineInputBorder(),
+                              keyboardType: TextInputType.multiline,
+                              textInputAction: TextInputAction.newline,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                hintText: "メッセージを入力",
                               ),
                             ),
                           ),
                         ),
                         IconButton(
-                            onPressed: () {
-                              if (controller.text != '') {
-                                FireStoreUtils.sendMessage(
-                                    roomId: widget.chatRoom.roomId,
-                                    message: controller.text);
-                                controller.clear();
-                              }
-                            },
-                            icon: const Icon(Icons.send))
+                          icon: FaIcon(
+                            FontAwesomeIcons.paperPlane,
+                            color: primaryColor,
+                          ),
+                          onPressed: () {
+                            if (controller.text != '') {
+                              FireStoreUtils.sendMessage(
+                                  roomId: widget.chatRoom.roomId,
+                                  message: controller.text);
+                              controller.clear();
+                            }
+                          },
+                        ),
                       ],
                     ),
                   ),

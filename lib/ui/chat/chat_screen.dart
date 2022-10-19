@@ -18,6 +18,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        title: const Text(
+          "トーク",
+          style: TextStyle(color: primaryTextColor),
+        ),
+      ),
       body: StreamBuilder<QuerySnapshot>(
           stream: FireStoreUtils.joindRoomSnapshot,
           //streamSnapshotとfutereSnapshotはややこしくなるから変数名変えてるだけ本来はsnapshotだけ。
@@ -43,14 +51,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                               );
                             },
                             child: SizedBox(
-                              height: 70,
+                              height: 90,
                               child: Row(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
                                     child: CircleAvatar(
-                                      radius: 30,
+                                      radius: 35,
                                       backgroundImage: chatRooms[index]
                                                   .talkUser!
                                                   .profilePictureURL ==
@@ -71,7 +79,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                       Text(
                                         chatRooms[index].talkUser!.name,
                                         style: const TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 21,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(

@@ -88,14 +88,27 @@ class _OtpLoginScreenState extends ConsumerState<OtpLoginScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            '届いたコードを入力してください',
-            style: TextStyle(
-              fontSize: 24,
-              color: primaryTextColor,
+          const Padding(
+            padding: EdgeInsets.only(right: 100),
+            child: Text(
+              '届いたコードを\n入力してください',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: primaryTextColor,
+              ),
             ),
           ),
-          Text(style: const TextStyle(fontSize: 20), "あなたの番号$phone"),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Text(
+              "あなたの番号$phone",
+              style: const TextStyle(
+                fontSize: 25,
+                color: secondaryTextColor,
+              ),
+            ),
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -199,6 +212,8 @@ class OtpInput extends StatelessWidget {
         cursorColor: primaryColor,
         decoration: const InputDecoration(
             border: OutlineInputBorder(),
+            focusedBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: primaryColor)),
             counterText: '',
             hintStyle: TextStyle(color: Colors.black, fontSize: 20.0)),
         onChanged: (value) {

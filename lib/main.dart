@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:instaflutter/model/User.dart';
 import 'package:instaflutter/ui/auth/welcome_screen.dart';
+import 'package:instaflutter/ui/home_screen.dart';
 
 import 'firebase_options.dart';
+import 'utils/FirebaseHelper.dart';
 
 //現時点では目標設定画面
 Future<void> main() async {
@@ -54,7 +58,40 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const WelcomeScreen(),
+      home: const AuthStatusCheck(),
+    );
+  }
+}
+
+class AuthStatusCheck extends ConsumerWidget {
+  const AuthStatusCheck({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    //値更新用のuserクラス
+    final user = ref.watch(userModelProvider.notifier);
+
+    modelSet() async {
+      //これでfirestoreから持ってきた値をUserクラスに代入し直す
+      user.state = (await FireStoreUtils.getCurrentUser(
+          FirebaseAuth.instance.currentUser!.uid))!;
+    }
+
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // スプラッシュ画面などに書き換えても良い
+          return const SizedBox();
+        }
+        if (snapshot.hasData) {
+          // User が null でなない、つまりサインイン済みのホーム画面へ
+          modelSet();
+          return const HomeScreen();
+        }
+        // User が null である、つまり未サインインのサインイン画面へ
+        return const WelcomeScreen();
+      },
     );
   }
 }

@@ -18,6 +18,7 @@ class PhotoScreen extends ConsumerStatefulWidget {
 }
 
 class _PhotoScreenState extends ConsumerState<PhotoScreen> {
+  var photoData;
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(userModelProvider);
@@ -35,7 +36,7 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
             .ref()
             .child('users/${currentUser.userID}/$uploadName');
         // Firebase Cloud Storageにアップロード
-        final task = await storageRef.putFile(file);
+        photoData = await storageRef.putFile(file);
       } catch (e) {
         print(e);
       }
@@ -141,8 +142,8 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
                     primary: primaryColor,
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        side: const BorderSide(color: primaryColor)),
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
                   ),
                   child: const Text(
                     '次',
@@ -151,15 +152,17 @@ class _PhotoScreenState extends ConsumerState<PhotoScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  onPressed: () async {
-                    //firestoreに値を更新
-                    await FireStoreUtils.updateCurrentUser(currentUser);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
-                  },
+                  onPressed: (photoData != null)
+                      ? () async {
+                          //firestoreに値を更新
+                          await FireStoreUtils.updateCurrentUser(currentUser);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()),
+                          );
+                        }
+                      : null,
                 ),
               ),
             ),

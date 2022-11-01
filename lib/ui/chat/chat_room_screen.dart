@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instaflutter/utils/colors.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:uuid/uuid.dart';
 
 import '../../model/Chat_room.dart';
 import '../../model/Message.dart';
@@ -20,6 +25,27 @@ class ChatRoomScreen extends ConsumerStatefulWidget {
 
 class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
   final TextEditingController controller = TextEditingController();
+
+  roomUploadPic() async {
+    try {
+      /// 画像を選択
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      File file = File(image!.path);
+
+      //ランダムなIDを代入
+      String uploadName = Uuid().v1();
+      //参照を作成
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('room/${widget.chatRoom.roomId}/$uploadName');
+      // Firebase Cloud Storageにアップロード
+      await storageRef.putFile(file);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -116,7 +142,9 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                             FontAwesomeIcons.image,
                             color: primaryColor,
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            roomUploadPic();
+                          },
                         ),
                         Expanded(
                           child: Padding(
@@ -137,7 +165,7 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                           ),
                         ),
                         IconButton(
-                          icon: FaIcon(
+                          icon: const FaIcon(
                             FontAwesomeIcons.paperPlane,
                             color: primaryColor,
                           ),

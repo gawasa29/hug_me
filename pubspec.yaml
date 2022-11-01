@@ -30,6 +30,8 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   #使えるアイコン増やす
   font_awesome_flutter: ^10.2.1
+  #ランダムなIDを作る（チャットの送信した画像にIDつけるために使ってる）
+  uuid: ^3.0.6
 #splash screen
 flutter_native_splash:
   image: assets/images/hug_me_logo_white.png

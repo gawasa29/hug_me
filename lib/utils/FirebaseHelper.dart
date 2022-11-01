@@ -104,6 +104,7 @@ class FireStoreUtils {
         .collection('message');
 
     await messageCollection.add({
+      'type': 'text',
       'message': message,
       'sender_id': auth.FirebaseAuth.instance.currentUser!.uid,
       'send_time': Timestamp.now()

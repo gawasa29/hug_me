@@ -156,22 +156,26 @@ class _OtpLoginScreenState extends ConsumerState<OtpLoginScreen> {
                         _fieldSix.text;
                   });
                   if (_otp.length == 6) {
-                    // 認証コード(smsCode)とverificationIdをfirebaseに送信して認証
-                    final credential = PhoneAuthProvider.credential(
-                        verificationId: _verificationCode, smsCode: _otp);
-                    // 認証が完了したらFirebaseAuthにユーザー登録
-                    await FirebaseAuth.instance
-                        .signInWithCredential(credential);
+                    try {
+                      // 認証コード(smsCode)とverificationIdをfirebaseに送信して認証
+                      final credential = PhoneAuthProvider.credential(
+                          verificationId: _verificationCode, smsCode: _otp);
+                      // 認証が完了したらFirebaseAuthにユーザー登録
+                      await FirebaseAuth.instance
+                          .signInWithCredential(credential);
 
-                    //これでfirestoreから持ってきた値をUserクラスに代入し直す
-                    user.state = (await FireStoreUtils.getCurrentUser(
-                        FirebaseAuth.instance.currentUser!.uid))!;
+                      //これでfirestoreから持ってきた値をUserクラスに代入し直す
+                      user.state = (await FireStoreUtils.getCurrentUser(
+                          FirebaseAuth.instance.currentUser!.uid))!;
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
+                      );
+                    } catch (e) {
+                      print(e);
+                    }
                   } else {
                     await showDialog(
                       context: context,

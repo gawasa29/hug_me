@@ -4,5 +4,10 @@ class Message {
   String message;
   bool isMe;
   Timestamp sendTime;
-  Message({required this.message, required this.isMe, required this.sendTime});
+  String type;
+  Message(
+      {required this.message,
+      required this.isMe,
+      required this.sendTime,
+      required this.type});
 }

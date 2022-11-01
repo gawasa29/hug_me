@@ -41,6 +41,19 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
           .child('room/${widget.chatRoom.roomId}/$uploadName');
       // Firebase Cloud Storageにアップロード
       await storageRef.putFile(file);
+
+      String imageUrl = await storageRef.getDownloadURL();
+      FirebaseFirestore.instance
+          .collection("room")
+          .doc(widget.chatRoom.roomId)
+          .collection('message')
+          .doc(uploadName)
+          .set({
+        'type': 'ima',
+        'message': imageUrl,
+        'sender_id': auth.FirebaseAuth.instance.currentUser!.uid,
+        'send_time': Timestamp.now()
+      });
     } catch (e) {
       print(e);
     }
@@ -88,40 +101,55 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                                   isMe: auth.FirebaseAuth.instance.currentUser!
                                           .uid ==
                                       data['sender_id'],
-                                  sendTime: data['send_time']);
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                    top: 10,
-                                    left: 10,
-                                    right: 10,
-                                    bottom: index == 0 ? 20 : 0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  textDirection: message.isMe
-                                      ? TextDirection.rtl
-                                      : TextDirection.ltr,
-                                  children: [
-                                    Container(
-                                        //テキストが長かったら折り返しする処理
-                                        constraints: BoxConstraints(
-                                            maxWidth: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.6),
-                                        decoration: BoxDecoration(
-                                            color: message.isMe
-                                                ? primaryColor
-                                                : Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 6),
-                                        child: Text(message.message)),
-                                    Text(intl.DateFormat("HH:mm")
-                                        .format(message.sendTime.toDate()))
-                                  ],
-                                ),
-                              );
+                                  sendTime: data['send_time'],
+                                  type: data['type']);
+                              return message.type == 'text'
+                                  ? Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 10,
+                                          left: 10,
+                                          right: 10,
+                                          bottom: index == 0 ? 20 : 0),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        textDirection: message.isMe
+                                            ? TextDirection.rtl
+                                            : TextDirection.ltr,
+                                        children: [
+                                          Container(
+                                              //テキストが長かったら折り返しする処理
+                                              constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.6),
+                                              decoration: BoxDecoration(
+                                                  color: message.isMe
+                                                      ? primaryColor
+                                                      : Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 6),
+                                              child: Text(message.message)),
+                                          Text(intl.DateFormat("HH:mm").format(
+                                              message.sendTime.toDate()))
+                                        ],
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 100,
+                                      width: 100,
+                                      alignment: message.isMe == true
+                                          ? Alignment.centerRight
+                                          : Alignment.centerLeft,
+                                      child: Image.network(message.message),
+                                    );
                             }),
                       );
                     } else {
